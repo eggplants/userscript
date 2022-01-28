@@ -1,4 +1,5 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
+
 readonly USERPAGEID=671442
 if ! command -v awk curl >/dev/null; then
   echo "Install: awk, curl">&2

@@ -17,15 +17,13 @@
     const tick = () => {
         console.log("tick");
         let cnt = 0;
-        Array.from(
-            document.querySelectorAll(
-                `span.Label.Label--secondary.v-align-middle`
-            )
+        document.querySelectorAll(
+          `span.Label.Label--secondary.v-align-middle`
         ).forEach((e) => {
-            if (e.innerText === "Public") {
-                e.style = "display: none !important";
-                cnt++;
-            }
+          if (e.innerText === "Public") {
+            e.style = "display: none !important";
+            cnt++;
+          }
         });
         if(cnt<1){
             timer.remove();
