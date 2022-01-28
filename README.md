@@ -1,6 +1,6 @@
 # userscript
 
-- Vault of original userscripts
+- Vault of my userscripts
 - Synced with my [GreasyFork](https://greasyfork.org/en/users/671442)
 
 ## Extra
