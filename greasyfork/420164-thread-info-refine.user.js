@@ -38,3 +38,5 @@ for(var i of x(`//*[@class="cno"]`))
 {
   i.textContent+="\t"
 }
+
+document.querySelectorAll('object[data*="ad.html"]').forEach(e=>e.remove())
