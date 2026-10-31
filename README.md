@@ -6,9 +6,8 @@ Vault of userscripts, synced with my [GreasyFork](https://greasyfork.org/en/user
 
 ```sh
 mise install
-pnpm install
-pnpm lint
-pnpm fmt
+mise run init
+mise generate git-pre-commit -w
 ```
 
 ## LICENSE

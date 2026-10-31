@@ -1,3 +1,23 @@
 [tools]
 node = "24"
 pnpm = "12"
+
+[tasks.init]
+description = "Install dependencies"
+run = "pnpm install"
+
+[tasks.lint]
+description = "Lint userscripts"
+run = "pnpm lint"
+
+[tasks.format]
+description = "Format files"
+run = "pnpm fmt"
+
+[tasks.pre-commit]
+description = "Check formatting and lint without modifying files"
+run = ["pnpm fmt:check", "pnpm lint"]
+
+[tasks.ci]
+description = "Install dependencies, then check formatting and lint"
+run = ["pnpm install --frozen-lockfile", "pnpm fmt:check", "pnpm lint"]
