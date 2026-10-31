@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Wikipedia Ad Remover
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Remove Wikipedia ads without click
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -14,18 +14,19 @@
   "use strict";
 
   function addStyleHide(cssSelector) {
-    var D = document;
-    var newNode = D.createElement("style");
+    const D = document;
+    const newNode = D.createElement("style");
     newNode.textContent = cssSelector + "{display:none !important;}";
-    var targ = D.getElementsByTagName("head")[0] || D.body || D.documentElement;
-    targ.appendChild(newNode);
+    const targ =
+      D.getElementsByTagName("head")[0] || D.body || D.documentElement;
+    targ.append(newNode);
   }
 
   // main
 
   const hideSelectors = ["div#siteNotice", "div#frb-nag"];
 
-  for (var i = 0; i < hideSelectors.length; i++) {
+  for (let i = 0; i < hideSelectors.length; i++) {
     addStyleHide(hideSelectors[i]);
   }
 })();

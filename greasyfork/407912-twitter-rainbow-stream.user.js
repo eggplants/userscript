@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Twitter Rainbow Stream
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Make your Twetter Stream electrifying!
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -9,10 +9,13 @@
 // @grant        none
 // ==/UserScript==
 
-function rainbow() {
-  const colors = "to right, red, orange, yellow, green, aqua, blue, purple";
-  const style = document.createElement("style");
-  style.textContent = `
+(function () {
+  "use strict";
+
+  function rainbow() {
+    const colors = "to right, red, orange, yellow, green, aqua, blue, purple";
+    const style = document.createElement("style");
+    style.textContent = `
         body {
             background: linear-gradient(${colors}) fixed !important;
         }
@@ -24,6 +27,7 @@ function rainbow() {
             background-color: transparent !important;
         }
     `;
-  (document.head || document.documentElement).appendChild(style);
-}
-rainbow();
+    (document.head || document.documentElement).append(style);
+  }
+  rainbow();
+})();

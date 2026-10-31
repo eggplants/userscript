@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Add badge markdown to pre-commit.ci
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Add code of badge markdown to CI result pages in pre-commit.ci
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -30,20 +30,17 @@
   badge_img.src = badge_src;
   const p_img = document.createElement("p");
   p_img.textContent = "badge preview: ";
-  p_img.appendChild(badge_img);
-  badge_area.appendChild(p_img);
+  p_img.append(badge_img);
+  badge_area.append(p_img);
 
   const badge_clip = document.createElement("input");
   badge_clip.value += `[![pre-commit.ci](${badge_src})](${badge_href})`;
   badge_clip.readOnly = true;
   const p_clip = document.createElement("p");
   p_clip.textContent = "markdown badge: ";
-  p_clip.appendChild(badge_clip);
-  badge_area.appendChild(p_clip);
+  p_clip.append(badge_clip);
+  badge_area.append(p_clip);
 
-  const target_parent = document.querySelector(
-    "div.container.bg-light.text-dark.py-5",
-  );
   const target = document.querySelector("div.pc-results.border.rounded.p-2");
-  target_parent.insertBefore(badge_area, target);
+  target.before(badge_area);
 })();

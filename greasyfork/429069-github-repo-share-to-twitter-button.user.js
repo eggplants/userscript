@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Repo Share-to-Twitter Button
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Add a Twitter share button to repository page
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -25,7 +25,7 @@
     const description = document.title;
     const pg_link = location.origin + location.pathname;
 
-    var b = document.createElement("a");
+    const b = document.createElement("a");
     b.className = "btn btn-sm share-to-twitter";
     b.setAttribute("target", "_blank");
     b.href =
@@ -36,10 +36,10 @@
       });
     b.textContent = "Share to Twitter";
 
-    var c = document.createElement("li");
-    c.appendChild(b);
+    const c = document.createElement("li");
+    c.append(b);
 
-    a.insertBefore(c, a.children[0]);
+    a.prepend(c);
   };
 
   addButton();

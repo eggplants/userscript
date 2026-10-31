@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Futaba Ad Remover
 // @namespace    http://tampermonkey.net/
-// @version      0.6
+// @version      0.7
 // @description  Remove Futabachannel ads
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -16,11 +16,12 @@
   "use strict";
 
   function addStyleHide(cssSelector) {
-    var D = document;
-    var newNode = D.createElement("style");
+    const D = document;
+    const newNode = D.createElement("style");
     newNode.textContent = cssSelector + "{display:none !important;}";
-    var targ = D.getElementsByTagName("head")[0] || D.body || D.documentElement;
-    targ.appendChild(newNode);
+    const targ =
+      D.getElementsByTagName("head")[0] || D.body || D.documentElement;
+    targ.append(newNode);
   }
   const hideSelectors = [
     "#ad-wrapper",
@@ -34,7 +35,7 @@
     'iframe[src*="dec.2chan.net"]',
   ];
 
-  for (var i = 0; i < hideSelectors.length; i++) {
+  for (let i = 0; i < hideSelectors.length; i++) {
     addStyleHide(hideSelectors[i]);
   }
 })();

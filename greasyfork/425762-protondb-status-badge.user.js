@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         ProtonDB Status Badge
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Add a badge of ProtonDB Status to Steam store page with shields.io.
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -15,7 +15,7 @@
 (function () {
   "use strict";
 
-  var D = document;
+  const D = document;
 
   const appid = location.pathname.split("/")[2];
   const badgeHref = "https://www.protondb.com/app/" + appid;
@@ -29,7 +29,7 @@
       style: "plastic",
     });
 
-  var protonElm = D.createElement("div");
+  const protonElm = D.createElement("div");
   protonElm.innerHTML = `
 <div class="user_reviews_summary_row">
     <div class="subtitle column">ProtonDB:</div>
@@ -42,5 +42,5 @@
   protonElm.querySelector("a").href = badgeHref;
   protonElm.querySelector("img").src = badgeSrc;
 
-  D.querySelector("div.user_reviews").appendChild(protonElm.firstChild);
+  D.querySelector("div.user_reviews").append(protonElm.firstChild);
 })();

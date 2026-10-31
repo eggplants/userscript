@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Ad Mutor
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Mute YouTube ads
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -13,8 +13,8 @@
 (function () {
   "use strict";
 
-  var inAd = false;
-  var wasMuted = false;
+  let inAd = false;
+  let wasMuted = false;
 
   function getVideo() {
     return document.querySelector("#movie_player video");

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Ad Remover
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @description  Skip and remove YouTube ads without click
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -14,18 +14,19 @@
   "use strict";
 
   function clickButton(selector) {
-    let elm = document.querySelector(selector);
+    const elm = document.querySelector(selector);
     if (elm) {
       elm.click();
     }
   }
 
   function addStyleHide(cssSelector) {
-    var D = document;
-    var newNode = D.createElement("style");
+    const D = document;
+    const newNode = D.createElement("style");
     newNode.textContent = cssSelector + "{display:none !important;}";
-    var targ = D.getElementsByTagName("head")[0] || D.body || D.documentElement;
-    targ.appendChild(newNode);
+    const targ =
+      D.getElementsByTagName("head")[0] || D.body || D.documentElement;
+    targ.append(newNode);
   }
 
   function tick() {
@@ -56,7 +57,7 @@
     "ytm-promoted-sparkles-web-renderer",
   ];
 
-  for (var i = 0; i < hideSelectors.length; i++) {
+  for (let i = 0; i < hideSelectors.length; i++) {
     addStyleHide(hideSelectors[i]);
   }
 

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Convert maven tab from xml to yml
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Convert maven tab from xml to yml on mvnrepository
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -16,9 +16,9 @@
   "use strict";
   "use moz";
   const findComments = (el) => {
-    let arr = [];
+    const arr = [];
     for (let i = 0; i < el.childNodes.length; i++) {
-      let node = el.childNodes[i];
+      const node = el.childNodes[i];
       if (node.nodeType === 8) {
         arr.push(node);
       } else {

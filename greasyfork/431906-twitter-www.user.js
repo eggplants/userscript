@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Twitter www
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  www
 // @author       eggplants
 // @homepage     https://github.com/eggplants
-// @include      https://x.com/*
+// @match        https://x.com/*
 // @grant        none
 // ==/UserScript==
 
