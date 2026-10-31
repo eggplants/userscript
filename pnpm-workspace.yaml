@@ -1,0 +1,6 @@
+nodeLinker:
+  type: loaded
+  # Packages with native bindings can't be loaded from the store
+  excluded:
+    - oxfmt
+    - oxlint

@@ -1,7 +1,9 @@
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "$schema": "https://unpkg.com/oxlint/configuration_schema.json",
   "plugins": ["eslint", "oxc", "unicorn", "promise"],
-  "jsPlugins": ["eslint-plugin-userscripts"],
+  "jsPlugins": [
+    { "name": "userscripts", "specifier": "./oxlint-plugin-userscripts.mjs" }
+  ],
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
@@ -22,7 +24,7 @@
     }
   },
   // Scripts whose target services are gone; kept as-is
-  "ignorePatterns": ["archive/**"],
+  "ignorePatterns": ["archive/**", "oxlint-plugin-userscripts.mjs"],
   "rules": {
     "no-undef": "error",
     "no-var": "error",
