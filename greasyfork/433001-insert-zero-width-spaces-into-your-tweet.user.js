@@ -1,86 +1,78 @@
 // ==UserScript==
 // @name         Insert zero-width spaces into your Tweet
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Insert zero-width characters in your tweets
 // @author       eggplants
 // @homepage     https://github.com/eggplants
-// @match        https://twitter.com/*/*
-// @match        https://twitter.com/*
+// @match        https://x.com/*
 // @grant        none
 // ==/UserScript==
 
 /*jshint esversion: 8 */
 
-function rafAsync() {
-    return new Promise((resolve) => {
-        requestAnimationFrame(resolve);
-    });
+function getText(editor) {
+    return Array.from(editor.querySelectorAll('[data-block="true"]'))
+        .map((block) => block.textContent)
+        .join("\n");
 }
 
-async function checkElement(selector) {
-    let q = null;
-    while (q === null) {
-        await rafAsync();
-        q = document.querySelector(selector);
-    }
-    return q;
+// The editor is Draft.js, so the text must be replaced through a paste event
+// for its internal state to follow the DOM.
+function replaceText(editor, text) {
+    editor.focus();
+    const range = document.createRange();
+    range.selectNodeContents(editor);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    setTimeout(() => {
+        const data = new DataTransfer();
+        data.setData("text/plain", text);
+        editor.dispatchEvent(
+            new ClipboardEvent("paste", {
+                clipboardData: data,
+                bubbles: true,
+                cancelable: true,
+            })
+        );
+    }, 100);
 }
 
-function main() {
+function addButton(toolBar) {
     "use strict";
     let btn = document.createElement("button");
-    btn.setAttribute("id", "zerow");
+    btn.className = "zerow";
+    btn.type = "button";
     btn.innerHTML = "Insert 0-width space";
     btn.onclick = function () {
-        let elms = Array.from(
-            document.querySelectorAll(
-                `div[style="max-height: 720px; min-height: 96px;"]>div>div>div>div>div>div>span>*`
-            )
-        );
-        let elms_ns = elms.map((x) => x.tagName);
-        let uniq_elms_ns = [...new Set(elms_ns.flat(1))];
-        if (
-            elms.length === 0 ||
-            (uniq_elms_ns.length === 1 && uniq_elms_ns[0] === "BR")
-        ) {
-            console.log("do nothing");
-        } else if (
-            elms_ns.includes("SPAN") &&
-            elms[elms.length - 1].tagName !== "BR"
-        ) {
-            alert("Put a new line at the end of your tweet!");
-        } else {
-            elms.forEach((e) => {
-                e.innerText = e.innerText
-                    .replaceAll('\u{200B}', "")
-                    .replaceAll(/(.)/g, "$1\u{200B}");
-            });
-            console.log("inserted!");
+        const selector = '[data-testid^="tweetTextarea_"][contenteditable="true"]';
+        let parent = toolBar;
+        while (parent !== null && parent.querySelector(selector) === null) {
+            parent = parent.parentElement;
         }
+        const editor = parent?.querySelector(selector);
+        if (!editor) {
+            console.log("editor is not found");
+            return;
+        }
+        const text = getText(editor).replaceAll("\u{200B}", "");
+        if (text.trim() === "") {
+            console.log("do nothing");
+            return;
+        }
+        replaceText(editor, text.replace(/[^\n]/g, "$&\u{200B}"));
+        console.log("inserted!");
     };
-    const qs =
-        "div.css-1dbjc4n.r-1iusvr4.r-16y2uox.r-1777fci" +
-        ".r-1h8ys4a.r-1bylmt5.r-13tjlyg.r-7qyjyx.r-1ftll1t" +
-        "> div:nth-child(3) > div > div > div:nth-child(1)";
-    checkElement(qs).then((e) => {
-        console.info(e);
-        e.appendChild(btn);
-    });
-    console.log("loaded!");
+    toolBar.firstElementChild.after(btn);
 }
 
 function waitForCompose() {
-    if (
-        window.location.href === "https://twitter.com/compose/tweet" &&
-        document.readyState === "complete" &&
-        document.getElementById("zerow") === null
-    ) {
-        main();
-        // clearInterval(t);
-    } else {
-        // console.log("timer");
-    }
+    document.querySelectorAll('[data-testid="toolBar"]').forEach((toolBar) => {
+        if (toolBar.querySelector("button.zerow") === null) {
+            addButton(toolBar);
+        }
+    });
 }
 
 var t = setInterval(waitForCompose, 500);
