@@ -12,23 +12,25 @@
 
 /*jshint esversion: 6 */
 
-(function() {
-'use strict';
+(function () {
+  "use strict";
 
-var D = document;
+  var D = document;
 
-const appid = location.pathname.split('/')[2];
-const badgeHref = 'https://www.protondb.com/app/' + appid;
-const badgeSrc = 'https://img.shields.io/badge/dynamic/json?' + new URLSearchParams({
-    url: `https://www.protondb.com/api/v1/reports/summaries/${appid}.json`,
-    query: '$.trendingTier',
-    label: 'ProtonDB',
-    color: 'e3e3e3',
-    style: 'plastic',
-});
+  const appid = location.pathname.split("/")[2];
+  const badgeHref = "https://www.protondb.com/app/" + appid;
+  const badgeSrc =
+    "https://img.shields.io/badge/dynamic/json?" +
+    new URLSearchParams({
+      url: `https://www.protondb.com/api/v1/reports/summaries/${appid}.json`,
+      query: "$.trendingTier",
+      label: "ProtonDB",
+      color: "e3e3e3",
+      style: "plastic",
+    });
 
-var protonElm = D.createElement('div');
-protonElm.innerHTML = `
+  var protonElm = D.createElement("div");
+  protonElm.innerHTML = `
 <div class="user_reviews_summary_row">
     <div class="subtitle column">ProtonDB:</div>
     <div class="summary column">
@@ -37,9 +39,8 @@ protonElm.innerHTML = `
         </a>
     </div>
 </div>`.trim();
-protonElm.querySelector('a').href = badgeHref;
-protonElm.querySelector('img').src = badgeSrc;
+  protonElm.querySelector("a").href = badgeHref;
+  protonElm.querySelector("img").src = badgeSrc;
 
-D.querySelector('div.user_reviews').appendChild(protonElm.firstChild);
-
+  D.querySelector("div.user_reviews").appendChild(protonElm.firstChild);
 })();

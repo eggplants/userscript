@@ -26,7 +26,7 @@
   const playSound = (s) => {
     var audio = new Audio(s);
     audio.play();
-  }
+  };
   const popup = (text, link) => {
     var notification = new Notification(text);
     notification.onclick = () => {
@@ -38,7 +38,7 @@
   // aria-live badges hold the unread count regardless of UI language
   const unread = (testid) => {
     const badge = document.querySelector(
-      `[data-testid="${testid}"] [aria-live="polite"]`
+      `[data-testid="${testid}"] [aria-live="polite"]`,
     );
     return badge === null ? 0 : parseInt(badge.textContent, 10) || 1;
   };
@@ -58,7 +58,7 @@
       console.log("Al");
       popup(
         `Notification has came!: ${Alert} unread items`,
-        "https://x.com/notifications"
+        "https://x.com/notifications",
       );
     }
     lastAlert = Alert;

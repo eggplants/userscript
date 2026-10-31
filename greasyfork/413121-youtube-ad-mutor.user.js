@@ -38,4 +38,4 @@
   }
 
   setInterval(mutor, 100);
-}());
+})();

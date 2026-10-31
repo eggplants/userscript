@@ -9,5 +9,6 @@
 // @grant        none
 // ==/UserScript==
 
-Array.from(document.querySelectorAll("table")).forEach(x=>x.setAttribute("border",""))
-
+Array.from(document.querySelectorAll("table")).forEach((x) =>
+  x.setAttribute("border", ""),
+);

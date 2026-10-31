@@ -10,9 +10,9 @@
 // ==/UserScript==
 
 function rainbow() {
-    const colors = 'to right, red, orange, yellow, green, aqua, blue, purple';
-    const style = document.createElement('style');
-    style.textContent = `
+  const colors = "to right, red, orange, yellow, green, aqua, blue, purple";
+  const style = document.createElement("style");
+  style.textContent = `
         body {
             background: linear-gradient(${colors}) fixed !important;
         }
@@ -24,6 +24,6 @@ function rainbow() {
             background-color: transparent !important;
         }
     `;
-    (document.head || document.documentElement).appendChild(style);
+  (document.head || document.documentElement).appendChild(style);
 }
 rainbow();

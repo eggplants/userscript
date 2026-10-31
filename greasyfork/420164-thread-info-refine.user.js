@@ -9,34 +9,35 @@
 // @grant        none
 // ==/UserScript==
 
-function x(sValue)
-{
+function x(sValue) {
   var aResult = new Array();
   var D = document;
   var a = D.evaluate(
-    sValue, D, null,
-    XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null
+    sValue,
+    D,
+    null,
+    XPathResult.ORDERED_NODE_SNAPSHOT_TYPE,
+    null,
   );
-  for (var i = 0;i < a.snapshotLength;i++)
-  {
-    aResult.push(a.snapshotItem(i))
+  for (var i = 0; i < a.snapshotLength; i++) {
+    aResult.push(a.snapshotItem(i));
   }
-  return aResult
-};
-
-
-for(var i of x(`//*[@class="rsc"]`))
-{
-  i.textContent+=":\t"
-}
-for(var i of x(`//*[@class="cnw"]`))
-{
-  i.textContent=i.textContent.replace(/\)/, ")\t")
-  i.textContent+="\t";;
-}
-for(var i of x(`//*[@class="cno"]`))
-{
-  i.textContent+="\t"
+  return aResult;
 }
 
-document.querySelectorAll('object[data*="ad.html"], object[data="/bance.html"], object[data="/inoue.php"]').forEach(e=>e.remove())
+for (var i of x(`//*[@class="rsc"]`)) {
+  i.textContent += ":\t";
+}
+for (var i of x(`//*[@class="cnw"]`)) {
+  i.textContent = i.textContent.replace(/\)/, ")\t");
+  i.textContent += "\t";
+}
+for (var i of x(`//*[@class="cno"]`)) {
+  i.textContent += "\t";
+}
+
+document
+  .querySelectorAll(
+    'object[data*="ad.html"], object[data="/bance.html"], object[data="/inoue.php"]',
+  )
+  .forEach((e) => e.remove());

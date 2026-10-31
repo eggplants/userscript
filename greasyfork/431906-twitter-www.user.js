@@ -9,16 +9,16 @@
 // @grant        none
 // ==/UserScript==
 
-setInterval(()=>{
-    if (location.pathname.startsWith("/compose/")) {
-        return;
+setInterval(() => {
+  if (location.pathname.startsWith("/compose/")) {
+    return;
+  }
+  document.querySelectorAll("span").forEach((x) => {
+    if (
+      typeof x.innerText === "string" &&
+      !x.closest('[contenteditable="true"]')
+    ) {
+      x.innerText = "ｗ".repeat(x.innerText.length);
     }
-    document.querySelectorAll('span').forEach(
-        x=>{
-            if (typeof(x.innerText)==="string" && !x.closest('[contenteditable="true"]')){
-                x.innerText="ｗ".repeat(x.innerText.length)
-               }
-            }
-        )
-    }, 500
-)
+  });
+}, 500);

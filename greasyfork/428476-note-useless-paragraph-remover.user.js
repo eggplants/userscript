@@ -10,21 +10,22 @@
 // @license      MIT
 // ==/UserScript==
 
-(function() {
-    "use strict";
+(function () {
+  "use strict";
 
-    // note is an SPA, so keep watching for newly rendered articles
-    const hide = () => {
-        Array.prototype.filter.call(
-            document.getElementsByTagName('p'),
-            function(n) {
-                return n.childNodes.length===1 && n.childNodes[0].tagName==="BR";
-            }
-        ).forEach(n=>{ n.style.display = "none"; });
-    };
-    hide();
-    new MutationObserver(hide).observe(document.documentElement, {
-        childList: true,
-        subtree: true,
-    });
-}());
+  // note is an SPA, so keep watching for newly rendered articles
+  const hide = () => {
+    Array.prototype.filter
+      .call(document.getElementsByTagName("p"), function (n) {
+        return n.childNodes.length === 1 && n.childNodes[0].tagName === "BR";
+      })
+      .forEach((n) => {
+        n.style.display = "none";
+      });
+  };
+  hide();
+  new MutationObserver(hide).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+})();

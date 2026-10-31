@@ -13,7 +13,10 @@
 
 /*jshint esversion: 6 */
 
-(function() {
-    "use strict";
-    GM_openInTab("https://instantdomainsearch.com/?q=" + window.location.host, false);
+(function () {
+  "use strict";
+  GM_openInTab(
+    "https://instantdomainsearch.com/?q=" + window.location.host,
+    false,
+  );
 })();

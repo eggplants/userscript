@@ -11,17 +11,17 @@
 // @license      MIT
 // ==/UserScript==
 
-(function() {
-    "use strict";
+(function () {
+  "use strict";
 
-    function addStyleHide(cssSelector){
-        var D = document;
-        var newNode = D.createElement('style');
-        newNode.textContent = cssSelector + "{display:none !important;}";
-        var targ = D.getElementsByTagName('head')[0] || D.body || D.documentElement;
-        targ.appendChild (newNode);
-    }
+  function addStyleHide(cssSelector) {
+    var D = document;
+    var newNode = D.createElement("style");
+    newNode.textContent = cssSelector + "{display:none !important;}";
+    var targ = D.getElementsByTagName("head")[0] || D.body || D.documentElement;
+    targ.appendChild(newNode);
+  }
 
-     addStyleHide("div.AdHolder");
-     addStyleHide(".s-result-item:has(.puis-sponsored-label-text)");
-}());
+  addStyleHide("div.AdHolder");
+  addStyleHide(".s-result-item:has(.puis-sponsored-label-text)");
+})();

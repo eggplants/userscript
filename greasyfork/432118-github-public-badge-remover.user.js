@@ -13,19 +13,19 @@
 /* jshint esversion: 6 */
 
 (function () {
-    "use strict";
-    const tick = () => {
-        document.querySelectorAll(
-          `span.Label, span[class*="Label-Label"]`
-        ).forEach((e) => {
-          if (e.textContent.trim() === "Public") {
-            e.style = "display: none !important";
-          }
-        });
-    };
-    tick();
-    new MutationObserver(tick).observe(document.documentElement, {
-        childList: true,
-        subtree: true,
-    });
+  "use strict";
+  const tick = () => {
+    document
+      .querySelectorAll(`span.Label, span[class*="Label-Label"]`)
+      .forEach((e) => {
+        if (e.textContent.trim() === "Public") {
+          e.style = "display: none !important";
+        }
+      });
+  };
+  tick();
+  new MutationObserver(tick).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
 })();

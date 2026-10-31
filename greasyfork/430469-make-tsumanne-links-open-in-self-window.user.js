@@ -23,10 +23,9 @@
 
 /* jshint esversion: 6 */
 
-(function() {
-    'use strict';
-    Array.from(
-        document.querySelectorAll("a[target=t]")
-    ).map(n=>n.target="_self");
- 
+(function () {
+  "use strict";
+  Array.from(document.querySelectorAll("a[target=t]")).map(
+    (n) => (n.target = "_self"),
+  );
 })();

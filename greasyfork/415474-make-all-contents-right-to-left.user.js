@@ -10,7 +10,10 @@
 // @license      MIT
 // ==/UserScript==
 
-(function() {
-    'use strict';
-    document.body.setAttribute("style", "unicode-bidi: bidi-override;direction: rtl;text-align: left;");
+(function () {
+  "use strict";
+  document.body.setAttribute(
+    "style",
+    "unicode-bidi: bidi-override;direction: rtl;text-align: left;",
+  );
 })();
