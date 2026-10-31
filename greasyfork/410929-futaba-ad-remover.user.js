@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Futaba Ad Remover
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.6
 // @description  Remove Futabachannel ads
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -23,21 +23,15 @@
         targ.appendChild (newNode);
     }
     const hideSelectors = [
-        "body > center > div:nth-child(9)",
-        "body > div:nth-child(2)",
-        "body > div:nth-child(6) > div",
-        "body > div:nth-child(8) > div",
-        "body > div.tue",
+        "#ad-wrapper",
+        "#ad-wrapper-overlay",
+        "#radtop",
+        "#rightad",
         "#rightadfloat",
         "#hdp + hr",
-        "div[align=\"center\"]",
-        "body > div:nth-child(16)",
-        "body > div:nth-child(17)",
-        "body > div:nth-child(18)",
-        "body > div:nth-child(20)",
-        "body > div:nth-child(21)",
-        "body > div:nth-child(41)",
-        "body > div:nth-child(47)"
+        "div.tue",
+        "div.tue2",
+        "iframe[src*=\"dec.2chan.net\"]"
     ];
 
     for (var i = 0; i < hideSelectors.length; i++) {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Amazon Sponsored Item Remover
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Remove Sponcored items from search result page on Amazon
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -23,4 +23,5 @@
     }
 
      addStyleHide("div.AdHolder");
+     addStyleHide(".s-result-item:has(.puis-sponsored-label-text)");
 }());

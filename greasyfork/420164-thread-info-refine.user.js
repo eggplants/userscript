@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Thread info refine
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  tsumanne.
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -39,4 +39,4 @@ for(var i of x(`//*[@class="cno"]`))
   i.textContent+="\t"
 }
 
-document.querySelectorAll('object[data*="ad.html"]').forEach(e=>e.remove())
+document.querySelectorAll('object[data*="ad.html"], object[data="/bance.html"], object[data="/inoue.php"]').forEach(e=>e.remove())

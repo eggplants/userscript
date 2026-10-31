@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hide Google logo in searchbox
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Hide 
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -10,4 +10,6 @@
 // @license      MIT
 // ==/UserScript==
 
-document.getElementsByClassName('x32v3e S003Ke ZoN4Lb')[0].remove()
+const style = document.createElement('style');
+style.textContent = 'form[role="search"] div:not(.logo) > a[href*="/webhp"] { display: none !important; }';
+document.head.appendChild(style);

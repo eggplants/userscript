@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Public Badge Remover
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @description  Remove Public badge in GutHub
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -15,19 +15,17 @@
 (function () {
     "use strict";
     const tick = () => {
-        console.log("tick");
-        let cnt = 0;
         document.querySelectorAll(
-          `span.Label.Label--secondary.v-align-middle`
+          `span.Label, span[class*="Label-Label"]`
         ).forEach((e) => {
-          if (e.innerText === "Public") {
+          if (e.textContent.trim() === "Public") {
             e.style = "display: none !important";
-            cnt++;
           }
         });
-        if(cnt<1){
-            timer.remove();
-        }
     };
-    const timer = setInterval(tick, 100);
+    tick();
+    new MutationObserver(tick).observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+    });
 })();

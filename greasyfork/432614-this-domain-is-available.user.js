@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         This domain is available?
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @description  Search now domain at instantdomainsearch.com from right-click menu
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -15,5 +15,5 @@
 
 (function() {
     "use strict";
-    GM_openInTab("https://instantdomainsearch.com/search/domains?q=" + window.location.host, false);
+    GM_openInTab("https://instantdomainsearch.com/?q=" + window.location.host, false);
 })();

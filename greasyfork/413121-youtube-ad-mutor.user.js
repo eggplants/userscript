@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         YouTube Ad Mutor
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Mute YouTube ads
 // @author       eggplants
 // @homepage     https://github.com/eggplants
@@ -14,32 +14,28 @@
   "use strict";
 
   var inAd = false;
-  
-  function clickMute() {
-    document.getElementsByClassName(
-      "ytp-mute-button"
-    )[0].click();
+  var wasMuted = false;
+
+  function getVideo() {
+    return document.querySelector("#movie_player video");
   }
   function chkAd() {
-    return document.getElementsByClassName(
-      "ytp-ad-player-overlay-skip-or-preview"
-    ).length > 0;
-  }
-  function chkMute() {
-    return document.getElementsByClassName(
-      "ytp-volume-slider-handle"
-    ).length > 0;
+    return document.querySelector(".html5-video-player.ad-showing") !== null;
   }
   function mutor() {
-
-    if (chkAd && !inAd && !chkMute) {
-      clickMute();
+    const video = getVideo();
+    if (video === null) {
+      return;
+    }
+    if (chkAd() && !inAd) {
+      wasMuted = video.muted;
+      video.muted = true;
       inAd = true;
-    } else if (!chkAd && inAd && chkMute) {
-      clickMute();
+    } else if (!chkAd() && inAd) {
+      video.muted = wasMuted;
       inAd = false;
     }
   }
 
-  setInterval(mutor, 10);
+  setInterval(mutor, 100);
 }());

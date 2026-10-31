@@ -1,30 +1,46 @@
 // ==UserScript==
 // @name         GitHub Repo Share-to-Twitter Button
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  Add a Twitter share button to repository page
 // @author       eggplants
 // @homepage     https://github.com/eggplants
-// @match        https://github.com/*/*
+// @match        https://github.com/*
 // @grant        none
 // @license      MIT
 // ==/UserScript==
 
-(window.onload = function() {
+/* jshint esversion: 6 */
+
+(function() {
     "use strict";
 
-    const description = document.title;
-    const pg_link = location.href;
+    const addButton = () => {
+        const a = document.querySelector('ul[class*="RepoHeaderActions-module"], ul.pagehead-actions');
+        if (a === null || a.querySelector('.share-to-twitter') !== null) {
+            return;
+        }
+        const description = document.title;
+        const pg_link = location.origin + location.pathname;
 
-    var a = document.getElementsByClassName('pagehead-actions flex-shrink-0 d-none d-md-inline')[0];
-    var b = document.createElement('a');
-    b.className = 'btn btn-sm';
-    b.setAttribute('target', '_blank');
-    b.href = 'http://twitter.com/share?text="' + description + '"%0a%0a' + pg_link;
-    b.textContent = 'Share to Twitter';
+        var b = document.createElement('a');
+        b.className = 'btn btn-sm share-to-twitter';
+        b.setAttribute('target', '_blank');
+        b.href = 'https://x.com/intent/post?' + new URLSearchParams({
+            text: '"' + description + '"\n\n',
+            url: pg_link,
+        });
+        b.textContent = 'Share to Twitter';
 
-    var c = document.createElement('li');
-    c.appendChild(b);
+        var c = document.createElement('li');
+        c.appendChild(b);
 
-    a.insertBefore(c, document.getElementsByClassName('pagehead-actions flex-shrink-0 d-none d-md-inline')[0].children[0]);
+        a.insertBefore(c, a.children[0]);
+    };
+
+    addButton();
+    new MutationObserver(addButton).observe(document.documentElement, {
+        childList: true,
+        subtree: true,
+    });
 }());
