@@ -1,0 +1,66 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["eslint", "oxc", "unicorn", "promise"],
+  "jsPlugins": ["eslint-plugin-userscripts"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  // Userscripts run as classic scripts in the browser, with the userscript
+  // manager's GM_* / GM.* APIs available
+  "env": {
+    "builtin": true,
+    "browser": true,
+    "greasemonkey": true
+  },
+  "settings": {
+    // Used by userscripts/compat-grant and userscripts/compat-headers
+    "userscriptVersions": {
+      "tampermonkey": "*",
+      "violentmonkey": "*"
+    }
+  },
+  // Scripts whose target services are gone; kept as-is
+  "ignorePatterns": ["archive/**"],
+  "rules": {
+    "no-undef": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "eqeqeq": ["error", "smart"],
+    // With `@grant none`, top-level declarations leak into the page's window
+    "no-implicit-globals": "error",
+    // Pages often forbid these via CSP
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "no-script-url": "error",
+    // Hoisting helpers out of the IIFE conflicts with no-implicit-globals
+    "unicorn/consistent-function-scoping": "off",
+    // The last `then()` usually just touches the DOM
+    "promise/always-return": ["warn", { "ignoreLastCallback": true }],
+
+    // `on*` properties overwrite the page's own handlers
+    "unicorn/prefer-add-event-listener": "warn",
+    "unicorn/prefer-dom-node-append": "warn",
+    "unicorn/prefer-dom-node-remove": "warn",
+    "unicorn/prefer-modern-dom-apis": "warn",
+
+    "userscripts/filename-user": ["error", "always"],
+    "userscripts/no-invalid-metadata": ["error", { "top": "required" }],
+    "userscripts/require-name": ["error", "required"],
+    "userscripts/require-description": ["error", "required"],
+    "userscripts/require-version": ["error", "required"],
+    "userscripts/require-attribute-space-prefix": "error",
+    // `@homepage` alone is understood by both Tampermonkey and Violentmonkey
+    "userscripts/use-homepage-and-url": "off",
+    "userscripts/require-download-url": "error",
+    "userscripts/align-attributes": ["error", 2],
+    "userscripts/metadata-spacing": "error",
+    "userscripts/no-invalid-headers": "error",
+    "userscripts/no-invalid-grant": "error",
+    "userscripts/compat-grant": "error",
+    "userscripts/compat-headers": "error",
+    "userscripts/better-use-match": "warn"
+  }
+}
